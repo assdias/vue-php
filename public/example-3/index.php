@@ -54,6 +54,7 @@
   <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
+  <script src="services.js" type="module"></script>
   <script src="appTable.js" type="module"></script>
   <script src="appForm.js" type="module"></script>
   <script src="script.js" type="module"></script>

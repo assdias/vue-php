@@ -1,6 +1,9 @@
 <?php
 
 $filename = __DIR__ . '/../storage/database.json';
+if (!file_exists($filename)) {
+    file_put_contents($filename, '{}');
+}
 
 if (strtoupper($_SERVER['REQUEST_METHOD']) === 'GET') {
     $database = json_decode(file_get_contents($filename), true);

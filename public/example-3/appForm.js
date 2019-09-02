@@ -1,3 +1,5 @@
+import { fetchRecord, saveRecord } from './services.js'
+
 // create Form Component
 export default {
   /**
@@ -6,30 +8,30 @@ export default {
   /**
    */
   template: `
-      <div class="page">
-        <form @submit="submit">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              v-model="record.name"
-              placeholder="ex.: John Doe"
-            >
-          </div>
-          <button class="btn btn-info">
-            Save
-          </button>
-          <button
-            class="btn btn-default"
-            type="button"
-            @click="$router.go(-1)"
+    <div class="page">
+      <form @submit="submit">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            v-model="record.name"
+            placeholder="ex.: John Doe"
           >
-            Back
-          </button>
-        </form>
-      </div>`,
+        </div>
+        <button class="btn btn-info">
+          Save
+        </button>
+        <button
+          class="btn btn-default"
+          type="button"
+          @click="$router.go(-1)"
+        >
+          Back
+        </button>
+      </form>
+    </div>`,
   data: () => ({
     record: {
       id: undefined,
@@ -49,45 +51,20 @@ export default {
     /**
      */
     saveItem () {
-      const init = {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.record)
-      }
-      fetch('api/', init)
-        .then(this.successSaveItem)
+      saveRecord(this.record)
+        .then((record) => {
+          this.record = record
+          alert('Save successfully!')
+        })
         .catch(() => alert('Houston, we have a problem!'))
-    },
-    /**
-     * @param response
-     */
-    successSaveItem (response) {
-      response.json().then((record) => this.record = record)
-      alert('Save successfully!')
     },
     /**
      * @param id
      */
     fetchItem (id) {
-      const init = {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }
-      fetch(`api?id=${id}`, init)
-        .then(this.receiveItem)
+      fetchRecord(id)
+        .then((record) => this.record = record)
         .catch(() => alert('Houston, we have a problem!'))
-    },
-    /**
-     * @param response
-     */
-    receiveItem (response) {
-      response.json().then((record) => this.record = record)
     }
   },
   /**
