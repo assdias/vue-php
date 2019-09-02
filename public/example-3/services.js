@@ -26,7 +26,7 @@ export function fetchRecord (id) {
     method: 'GET',
     headers
   }
-  return fetch(`api?id=${id}`, init).then((response) => response.json())
+  return fetch(`api/${id}`, init).then((response) => response.json())
 }
 
 export function saveRecord (record) {
