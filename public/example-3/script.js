@@ -1,36 +1,73 @@
-import AppTable from './appTable.js'
-import AppForm from './appForm.js'
-
-// load app
 document.addEventListener('DOMContentLoaded', function () {
-  // install Router
-  Vue.use(VueRouter)
-
-  // create Router
-  const router = new VueRouter({
-    routes: [
-      {
-        path: '/',
-        component: AppTable
-      },
-      {
-        path: '/new',
-        component: AppForm
-      },
-      {
-        path: '/:id',
-        component: AppForm
+  // create AppHeader
+  Vue.component('app-header', {
+    /**
+     */
+    template: '#app-header-template',
+    /**
+     */
+    data: () => ({
+      like: false
+    }),
+    /**
+     */
+    methods: {
+      /**
+       */
+      toggleLikeApp () {
+        this.like = !this.like
+        this.$store.commit('doYouLikeThisApp', this.like)
       }
-    ]
+    }
+  })
+
+  // create AppFooter
+  Vue.component('app-footer', {})
+
+  Vue.use(Vuex)
+
+  // create Vuex
+  const store = new Vuex.Store({
+    /**
+     */
+    state: {
+      yes: false
+    },
+    /**
+     */
+    mutations: {
+      doYouLikeThisApp (state, yes) {
+        state.yes = yes
+      }
+    }
   })
 
   // create Vue
   new Vue({
     /**
      */
-    el: '#app',
+    el: '#page',
     /**
      */
-    router
+    store,
+    /**
+     */
+    computed: {
+      /**
+       * @return {boolean}
+       */
+      userLikesThisApp () {
+        return this.$store.state.yes
+      },
+      /**
+       * @return {Object}
+       */
+      prices () {
+        if (this.$store.state.yes) {
+          return { pro: 15, enterprise: 29 }
+        }
+        return { pro: 23, enterprise: 45 }
+      }
+    }
   })
 })

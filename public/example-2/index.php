@@ -1,3 +1,10 @@
+<?php
+$data = [
+    'email' => 'wilcorrea@gmail.com',
+    'password' => rand(pow(10, 6 - 1), pow(10, 6) - 1),
+    'remember' => true
+];
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,13 +13,12 @@
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
   >
-  <title>Pricing example · Bootstrap</title>
+  <title>Floating labels example · Bootstrap</title>
 
   <link
     rel="canonical"
-    href="https://getbootstrap.com/docs/4.3/examples/pricing/"
+    href="https://getbootstrap.com/docs/4.3/examples/floating-labels/"
   >
-
   <!-- Bootstrap core CSS -->
   <link
     href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css"
@@ -20,7 +26,6 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous"
   >
-
   <style>
   .bd-placeholder-img {
     font-size: 1.125rem;
@@ -39,103 +44,97 @@
   </style>
   <!-- Custom styles for this template -->
   <link
-    href="https://getbootstrap.com/docs/4.3/examples/pricing/pricing.css"
+    href="https://getbootstrap.com/docs/4.3/examples/floating-labels/floating-labels.css"
     rel="stylesheet"
   >
 </head>
 <body>
-  <div id="page">
-    <app-header></app-header>
+  <div id="app">
+    <form
+      method="post"
+      action="index.php?submitted=true"
+    >
+      <my-form
+        inline-template
+        :value="<?php echo htmlentities(json_encode($data)) ?>"
+      >
+        <div class="form-signin">
+          <div class="text-center mb-4">
+            <img
+              class="mb-4"
+              src="https://getbootstrap.com/docs/4.3/assets/brand/bootstrap-solid.svg"
+              alt=""
+              width="72"
+              height="72"
+            >
+          </div>
 
-    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h1 class="display-4">Pricing</h1>
-      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
-        It’s built with default Bootstrap components and utilities with little customization.
-      </p>
-    </div>
+          <div class="form-label-group">
+            <input
+              type="email"
+              name="email"
+              id="inputEmail"
+              class="form-control"
+              placeholder="Email address"
+              required
+              autofocus
+              v-model="post.email"
+            >
+            <label for="inputEmail">Email address</label>
+          </div>
 
-    <div class="container">
-      <div class="card-deck mb-3 text-center">
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Free</h4>
+          <div class="form-label-group">
+            <input
+              :type="password.type"
+              name="password"
+              id="inputPassword"
+              class="form-control"
+              placeholder="Password"
+              required
+              v-model="post.password"
+              @dblclick="changePasswordType"
+            >
+            <label for="inputPassword">Password</label>
           </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">$0
-              <small class="text-muted">/ mo</small>
-            </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>10 users included</li>
-              <li>2 GB of storage</li>
-              <li>Email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button
-              type="button"
-              class="btn btn-lg btn-block btn-outline-primary"
-            >Sign up for free
-            </button>
+
+          <div class="checkbox mb-3">
+            <label>
+              <input
+                type="checkbox"
+                value="remember-me"
+                v-model="post.remember"
+              >
+              Remember me
+            </label>
           </div>
+
+          <hr>
+
+          <button
+            class="btn btn-lg btn-primary btn-block"
+            type="submit"
+          >
+            Sign in
+          </button>
+          <p class="mt-5 mb-3 text-muted text-center">&copy; 2017-2019</p>
+
         </div>
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Pro</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">${{ prices.pro }}
-              <small class="text-muted">/ mo</small>
-            </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>20 users included</li>
-              <li>10 GB of storage</li>
-              <li>Priority email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button
-              type="button"
-              class="btn btn-lg btn-block btn-primary"
-            >Get started
-            </button>
-          </div>
-        </div>
-        <div class="card mb-4 shadow-sm">
-          <div class="card-header">
-            <h4 class="my-0 font-weight-normal">Enterprise</h4>
-          </div>
-          <div class="card-body">
-            <h1 class="card-title pricing-card-title">${{ prices.enterprise }}
-              <small class="text-muted">/ mo</small>
-            </h1>
-            <ul class="list-unstyled mt-3 mb-4">
-              <li>30 users included</li>
-              <li>15 GB of storage</li>
-              <li>Phone and email support</li>
-              <li>Help center access</li>
-            </ul>
-            <button
-              type="button"
-              class="btn btn-lg btn-block btn-primary"
-            >Contact us
-            </button>
-          </div>
-        </div>
+      </my-form>
+
+      <div class="text-center mb-4">
+        <p><i>Exemplo retirado da documentação</i>
+          <a href="https://getbootstrap.com/docs/4.3/examples/floating-labels">(link do original)</a>
+        </p>
       </div>
-
-      <app-footer inline-template>
-        <?php include __DIR__ . '/footer.php' ?>
-      </app-footer>
-    </div>
+      <div class="text-center mb-4">
+        <p>Build form controls with floating labels via the <code>:placeholder-shown</code> pseudo-element.
+          <a href="https://caniuse.com/#feat=css-placeholder-shown">Works in latest Chrome, Safari, and Firefox.</a>
+        </p>
+      </div>
+    </form>
   </div>
-
-  <script
-    id="app-header-template"
-    type="text/x-template"
-  >
-  <?php include __DIR__ . '/header.php' ?>
-  </script>
   <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

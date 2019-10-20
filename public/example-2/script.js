@@ -1,73 +1,48 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // create AppHeader
-  Vue.component('app-header', {
-    /**
-     */
-    template: '#app-header-template',
-    /**
-     */
-    data: () => ({
-      like: false
-    }),
-    /**
-     */
-    methods: {
-      /**
-       */
-      toggleLikeApp () {
-        this.like = !this.like
-        this.$store.commit('doYouLikeThisApp', this.like)
+
+  Vue.component('MyForm', {
+    props: {
+      value: {
+        type: Object,
+        default: () => ({})
       }
-    }
-  })
-
-  // create AppFooter
-  Vue.component('app-footer', {})
-
-  Vue.use(Vuex)
-
-  // create Vuex
-  const store = new Vuex.Store({
-    /**
-     */
-    state: {
-      yes: false
     },
-    /**
-     */
-    mutations: {
-      doYouLikeThisApp (state, yes) {
-        state.yes = yes
+    data: function () {
+      return {
+        password: {
+          type: 'password'
+        },
+        post: {
+          email: 'my@gmail.com',
+          password: Math.ceil(Math.random() * 10000000),
+          remember: true
+        },
+        remember: true
+      }
+    },
+    methods: {
+      changePasswordType () {
+        let type = 'password'
+        if (this.password.type === type) {
+          type = 'text'
+        }
+        this.password.type = type
+      }
+    },
+    watch: {
+      value: {
+        immediate: true,
+        handler (value) {
+          const { email, password, remember } = value
+          this.post.email = email
+          this.post.password = password
+          this.post.remember = remember
+        }
       }
     }
   })
 
-  // create Vue
   new Vue({
-    /**
-     */
-    el: '#page',
-    /**
-     */
-    store,
-    /**
-     */
-    computed: {
-      /**
-       * @return {boolean}
-       */
-      userLikesThisApp () {
-        return this.$store.state.yes
-      },
-      /**
-       * @return {Object}
-       */
-      prices () {
-        if (this.$store.state.yes) {
-          return { pro: 15, enterprise: 29 }
-        }
-        return { pro: 23, enterprise: 45 }
-      }
-    }
+    el: '#app'
   })
 })

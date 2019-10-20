@@ -6,7 +6,7 @@
     name="viewport"
     content="width=device-width, initial-scale=1, shrink-to-fit=no"
   >
-  <title>Bootstrap</title>
+  <title>Pricing example · Bootstrap</title>
 
   <link
     rel="canonical"
@@ -22,19 +22,19 @@
   >
 
   <style>
-  #app {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
-  .page {
-    width: 400px;
-    padding: 20px;
-    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-    border-radius: 4px;
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
   }
   </style>
   <!-- Custom styles for this template -->
@@ -44,19 +44,98 @@
   >
 </head>
 <body>
-  <div
-    id="app"
-    class="container"
-  >
-    <router-view></router-view>
+  <div id="page">
+    <app-header></app-header>
+
+    <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+      <h1 class="display-4">Pricing</h1>
+      <p class="lead">Quickly build an effective pricing table for your potential customers with this Bootstrap example.
+        It’s built with default Bootstrap components and utilities with little customization.
+      </p>
+    </div>
+
+    <div class="container">
+      <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Free</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">$0
+              <small class="text-muted">/ mo</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>10 users included</li>
+              <li>2 GB of storage</li>
+              <li>Email support</li>
+              <li>Help center access</li>
+            </ul>
+            <button
+              type="button"
+              class="btn btn-lg btn-block btn-outline-primary"
+            >Sign up for free
+            </button>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Pro</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">${{ prices.pro }}
+              <small class="text-muted">/ mo</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>20 users included</li>
+              <li>10 GB of storage</li>
+              <li>Priority email support</li>
+              <li>Help center access</li>
+            </ul>
+            <button
+              type="button"
+              class="btn btn-lg btn-block btn-primary"
+            >Get started
+            </button>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Enterprise</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title">${{ prices.enterprise }}
+              <small class="text-muted">/ mo</small>
+            </h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>30 users included</li>
+              <li>15 GB of storage</li>
+              <li>Phone and email support</li>
+              <li>Help center access</li>
+            </ul>
+            <button
+              type="button"
+              class="btn btn-lg btn-block btn-primary"
+            >Contact us
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <app-footer inline-template>
+        <?php include __DIR__ . '/footer.php' ?>
+      </app-footer>
+    </div>
   </div>
 
+  <script
+    id="app-header-template"
+    type="text/x-template"
+  >
+  <?php include __DIR__ . '/header.php' ?>
+  </script>
   <!-- development version, includes helpful console warnings -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
-  <script src="services.js" type="module"></script>
-  <script src="appTable.js" type="module"></script>
-  <script src="appForm.js" type="module"></script>
-  <script src="script.js" type="module"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuex/dist/vuex.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
